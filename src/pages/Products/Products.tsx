@@ -28,7 +28,8 @@ const Products = () => {
   }
   const { data } = useGetProductsQuery(query);
   // const {data: orders} = useGetOrdersQuery(undefined)
-  // console.log(orders);
+  // const cart = useSelector(selectCart)
+  // console.log(cart);
 
   return (
     <Container>
