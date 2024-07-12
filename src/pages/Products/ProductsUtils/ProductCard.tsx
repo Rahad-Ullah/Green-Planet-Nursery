@@ -21,6 +21,7 @@ const ProductCard = ({product}: {product: TProduct}) => {
     dispatch(addToCart({
       product,
       quantity: 1,
+      price,
     }))
   }
   

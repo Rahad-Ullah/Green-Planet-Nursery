@@ -18,10 +18,12 @@ import {
 } from "@/components/ui/table";
 import { selectCart } from "@/redux/features/cart/cartSlice";
 import { useAppSelector } from "@/redux/hook";
+import { calculation } from "@/utils/calculation";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const cartData = useAppSelector(selectCart);
-  console.log("from cart", cartData);
+  const { subTotal, shipping, total } = calculation(cartData);
   return (
     <Container>
       <div className="flex flex-col md:flex-row gap-8 my-16">
@@ -40,8 +42,8 @@ const Cart = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {cartData.map((item) => (
-                <TableRow>
+              {cartData.map((item, index) => (
+                <TableRow key={index}>
                   <TableCell>
                     <img src={item?.product?.image} alt="product" />
                   </TableCell>
@@ -60,42 +62,23 @@ const Cart = () => {
               <CardTitle className="font-bold text-3xl">Cart Total</CardTitle>
             </CardHeader>
             <CardContent>
-              {/* <form>
-                <div className="grid w-full items-center gap-4">
-                  <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="name">Name</Label>
-                    <Input id="name" placeholder="Name of your project" />
-                  </div>
-                  <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="framework">Framework</Label>
-                    <Select>
-                      <SelectTrigger id="framework">
-                        <SelectValue placeholder="Select" />
-                      </SelectTrigger>
-                      <SelectContent position="popper">
-                        <SelectItem value="next">Next.js</SelectItem>
-                        <SelectItem value="sveltekit">SvelteKit</SelectItem>
-                        <SelectItem value="astro">Astro</SelectItem>
-                        <SelectItem value="nuxt">Nuxt.js</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-              </form> */}
               <h3 className="flex justify-between font-bold mb-8">
-                Subtotal <span>0</span>
+                Subtotal <span>{subTotal}</span>
               </h3>
               <h3 className="flex justify-between font-bold mb-8">
-                Shipping <span>0</span>
+                Shipping <span>{shipping}</span>
               </h3>
               <h3 className="flex justify-between font-bold mb-8">
-                Total <span>0</span>
+                Total <span>{total}</span>
               </h3>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button className="w-full text-base py-6 rounded-full">
-                CHECKOUT
-              </Button>
+              <Link
+                to={"/checkout"}
+                className="w-full"
+              >
+                <Button className="w-full text-base py-6 rounded-full">CHECKOUT</Button>
+              </Link>
             </CardFooter>
           </Card>
         </div>

@@ -36,6 +36,7 @@ const ProductDetails = () => {
       addToCart({
         product,
         quantity,
+        price: product?.price
       })
     );
     toast.success('Successfully added')
