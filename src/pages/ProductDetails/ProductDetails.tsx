@@ -1,7 +1,7 @@
 import Container from "@/components/shared/Container";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useGetSingleProductsQuery } from "@/redux/features/productsApi/productsApi";
+import { useGetSingleProductQuery } from "@/redux/features/productsApi/productsApi";
 import { TProduct } from "@/types/TProduct";
 import { MinusIcon, PlusIcon, ShoppingCart } from "lucide-react";
 import { Rating } from "primereact/rating";
@@ -14,7 +14,7 @@ const ProductDetails = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
-  const { data } = useGetSingleProductsQuery(id);
+  const { data } = useGetSingleProductQuery(id);
   const product = data?.data as TProduct;
 
   const handleAddToCart = () => {}
