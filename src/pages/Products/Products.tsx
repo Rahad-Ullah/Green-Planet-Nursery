@@ -13,9 +13,22 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
+import { TProductsQuery } from "@/types/TProductsQuery";
 
 const Products = () => {
-  const { data } = useGetProductsQuery(undefined);
+  const query: TProductsQuery = {
+    search: '',
+    category: '',
+    minPrice: 0,
+    maxPrice: 10000,
+    sortBy: '',
+    sortOrder: '',
+    page: 1,
+    limit: 12
+  }
+  const { data } = useGetProductsQuery(query);
+  // const {data: orders} = useGetOrdersQuery(undefined)
+  // console.log(orders);
 
   return (
     <Container>
