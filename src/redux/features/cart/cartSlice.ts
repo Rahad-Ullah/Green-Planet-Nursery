@@ -26,5 +26,4 @@ export const { addToCart, getCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
 
-
-export const selectCart = (state: RootState) => state.cart
+export const selectCart = (state: RootState) => state.cart;

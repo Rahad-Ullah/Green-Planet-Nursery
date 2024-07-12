@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
-import { Earth, MenuIcon } from "lucide-react";
+import { Earth, MenuIcon, ShoppingCart } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -71,7 +71,9 @@ const Navbar = () => {
             </Link>
           </NavigationMenuLink>
           <NavigationMenuItem>
-            <NavigationMenuTrigger className="text-base">Features</NavigationMenuTrigger>
+            <NavigationMenuTrigger className="text-base">
+              Features
+            </NavigationMenuTrigger>
             <NavigationMenuContent>
               <div className="grid w-[400px] p-2">
                 <NavigationMenuLink asChild>
@@ -138,7 +140,9 @@ const Navbar = () => {
             </Link>
           </NavigationMenuLink>
           <NavigationMenuItem>
-            <NavigationMenuTrigger className="text-base">Contact</NavigationMenuTrigger>
+            <NavigationMenuTrigger className="text-base">
+              Contact
+            </NavigationMenuTrigger>
             <NavigationMenuContent>
               <div className="grid w-[400px] p-2">
                 <NavigationMenuLink asChild>
@@ -173,7 +177,9 @@ const Navbar = () => {
         </NavigationMenuList>
       </NavigationMenu>
       <div className="">
-        <Button className="text-base">Get Started</Button>
+        <Link to={'/cart'}>
+          <Button className="text-base"><ShoppingCart/></Button>
+        </Link>
       </div>
     </header>
   );

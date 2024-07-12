@@ -1,7 +1,9 @@
 import Container from "@/components/shared/Container";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { addToCart } from "@/redux/features/cart/cartSlice";
 import { useGetSingleProductQuery } from "@/redux/features/productsApi/productsApi";
+import { useAppDispatch } from "@/redux/hook";
 import { TProduct } from "@/types/TProduct";
 import { MinusIcon, PlusIcon, ShoppingCart } from "lucide-react";
 import { Rating } from "primereact/rating";
@@ -17,7 +19,14 @@ const ProductDetails = () => {
   const { data } = useGetSingleProductQuery(id);
   const product = data?.data as TProduct;
 
-  const handleAddToCart = () => {}
+  const dispatch = useAppDispatch()
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({
+      product,
+      quantity,
+    }))
+  }
 
   return (
     <Container>
@@ -83,7 +92,7 @@ const ProductDetails = () => {
               </Button>
             </div>
             {/* Add To cart button */}
-            <Button className="text-lg md:text-xl flex items-center gap-2 p-8 rounded-full">
+            <Button onClick={handleAddToCart} className="text-lg md:text-xl flex items-center gap-2 p-8 rounded-full">
               <ShoppingCart className="size-6" /> Add To Cart
             </Button>
           </div>
