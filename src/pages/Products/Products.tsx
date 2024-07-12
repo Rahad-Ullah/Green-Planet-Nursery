@@ -27,9 +27,9 @@ const Products = () => {
     limit: 12
   }
   const { data } = useGetProductsQuery(query);
-  // const {data: orders} = useGetOrdersQuery(undefined)
+
+  // const [createCategory, categories] = useCreateCategoryMutation()
   // const cart = useSelector(selectCart)
-  // console.log(cart);
 
   return (
     <Container>
