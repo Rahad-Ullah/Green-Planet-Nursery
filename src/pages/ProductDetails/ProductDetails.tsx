@@ -1,7 +1,11 @@
 import Container from "@/components/shared/Container";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { addToCart, selectCart } from "@/redux/features/cart/cartSlice";
+import {
+  addToCart,
+  increaseQuantity,
+  selectCart,
+} from "@/redux/features/cart/cartSlice";
 import { useGetSingleProductQuery } from "@/redux/features/productsApi/productsApi";
 import { useAppDispatch } from "@/redux/hook";
 import { TProduct } from "@/types/TProduct";
@@ -22,24 +26,25 @@ const ProductDetails = () => {
   const product = data?.data as TProduct;
 
   const dispatch = useAppDispatch();
-  const cartData = useSelector(selectCart)
+  const cartData = useSelector(selectCart);
 
   const handleAddToCart = () => {
     // check if already added
-    const isAdded = cartData.find(item => item.product._id === id)
-    if(isAdded){
-      toast.error('Already added')
-      return
+    const isAdded = cartData.find((item) => item.product._id === id);
+    if (isAdded) {
+      dispatch(increaseQuantity({...isAdded, increaseBy: quantity}));
+      toast.success("Item Quantity Updated");
+      return;
     }
-    
+
     dispatch(
       addToCart({
         product,
         quantity,
-        price: product?.price
+        price: product?.price,
       })
     );
-    toast.success('Successfully added')
+    toast.success("Successfully added");
   };
 
   return (

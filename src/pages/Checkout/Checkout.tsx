@@ -14,8 +14,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useCreateOrderMutation } from "@/redux/features/cart/cartApi";
-import { selectCart } from "@/redux/features/cart/cartSlice";
-import { useAppSelector } from "@/redux/hook";
+import { resetState, selectCart } from "@/redux/features/cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { calculation } from "@/utils/calculation";
 import { XIcon } from "lucide-react";
 import { useState } from "react";
@@ -26,9 +26,10 @@ const Checkout = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("COD");
 
   const cartData = useAppSelector(selectCart);
+  const dispatch = useAppDispatch()
   const [createOrder] = useCreateOrderMutation();
   const { subTotal, shipping, total } = calculation(cartData);
 
@@ -62,6 +63,7 @@ const Checkout = () => {
       const res = await createOrder(orderData).unwrap();
       if (res.success) {
         toast.success("Order placed successfully");
+        dispatch(resetState())
       }
     } catch (error) {
       console.log(error);

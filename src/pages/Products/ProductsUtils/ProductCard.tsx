@@ -6,28 +6,41 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { addToCart } from "@/redux/features/cart/cartSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { addToCart, increaseQuantity, selectCart } from "@/redux/features/cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { TProduct } from "@/types/TProduct";
 import { ShoppingCart } from "lucide-react";
 import { Rating } from "primereact/rating";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
-const ProductCard = ({product}: {product: TProduct}) => {
-  const {_id, title, image, price, rating} = product
-  const dispatch = useAppDispatch()
+const ProductCard = ({ product }: { product: TProduct }) => {
+  const { _id, title, image, price, rating } = product;
+  const dispatch = useAppDispatch();
+  const cartData = useAppSelector(selectCart)
 
   const handleAddToCart = () => {
-    dispatch(addToCart({
-      product,
-      quantity: 1,
-      price,
-    }))
-  }
-  
+    // check if the product already added
+    const isAdded = cartData.find(item => item.product._id === _id)
+    if(isAdded){
+      dispatch(increaseQuantity({...isAdded, increaseBy: 1}))
+      toast.success('Item Quantity Updated')
+      return
+    }
+    
+    dispatch(
+      addToCart({
+        product,
+        quantity: 1,
+        price,
+      })
+    );
+    toast.success('Added to cart successfully')
+  };
+
   return (
-    <Link to={`/products/${_id}`}>
-      <Card>
+    <Card>
+      <Link to={`/products/${_id}`}>
         <CardHeader className="pb-3">
           <img
             src={image}
@@ -45,13 +58,16 @@ const ProductCard = ({product}: {product: TProduct}) => {
             className="flex gap-1 text-amber-500 pt-2"
           />
         </CardContent>
-        <CardFooter>
-          <Button onClick={handleAddToCart} className="w-full text-base flex items-center gap-2">
-            <ShoppingCart className="size-6" /> Add To Cart
-          </Button>
-        </CardFooter>
-      </Card>
-    </Link>
+      </Link>
+      <CardFooter>
+        <Button
+          onClick={handleAddToCart}
+          className="w-full text-base flex items-center gap-2"
+        >
+          <ShoppingCart className="size-6" /> Add To Cart
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
 

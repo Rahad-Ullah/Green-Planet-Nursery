@@ -12,13 +12,27 @@ const cartSlice = createSlice({
       const item = action.payload;
       state.push(item);
     },
+    increaseQuantity: (state, action) => {
+      const { product, increaseBy } = action.payload;
+      const existingItem = state.find(
+        (item) => item.product._id === product._id
+      );
+
+      if (existingItem) {
+        existingItem.quantity += increaseBy;
+      }
+    },
+    resetState: (state) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      state.forEach(item => state.pop())
+    },
     getCart: (state) => {
       return state;
     },
   },
 });
 
-export const { addToCart, getCart } = cartSlice.actions;
+export const { addToCart, getCart, increaseQuantity, resetState } = cartSlice.actions;
 
 export default cartSlice.reducer;
 
