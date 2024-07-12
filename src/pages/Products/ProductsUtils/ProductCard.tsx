@@ -6,12 +6,24 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { addToCart } from "@/redux/features/cart/cartSlice";
+import { useAppDispatch } from "@/redux/hook";
 import { TProduct } from "@/types/TProduct";
 import { ShoppingCart } from "lucide-react";
 import { Rating } from "primereact/rating";
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ _id, title, price, rating, image }: TProduct) => {
+const ProductCard = ({product}: {product: TProduct}) => {
+  const {_id, title, image, price, rating} = product
+  const dispatch = useAppDispatch()
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({
+      product,
+      quantity: 1,
+    }))
+  }
+  
   return (
     <Link to={`/products/${_id}`}>
       <Card>
@@ -33,7 +45,7 @@ const ProductCard = ({ _id, title, price, rating, image }: TProduct) => {
           />
         </CardContent>
         <CardFooter>
-          <Button className="w-full text-base flex items-center gap-2">
+          <Button onClick={handleAddToCart} className="w-full text-base flex items-center gap-2">
             <ShoppingCart className="size-6" /> Add To Cart
           </Button>
         </CardFooter>

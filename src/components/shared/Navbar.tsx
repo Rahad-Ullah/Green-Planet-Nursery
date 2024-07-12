@@ -10,8 +10,13 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "../ui/navigation-menu";
+import { Badge } from "../ui/badge";
+import { useAppSelector } from "@/redux/hook";
+import { selectCart } from "@/redux/features/cart/cartSlice";
 
 const Navbar = () => {
+  const cartData = useAppSelector(selectCart)
+  
   return (
     <header className="flex h-20 w-full shrink-0 justify-between items-center px-4 md:px-6">
       <Sheet>
@@ -28,22 +33,22 @@ const Navbar = () => {
           </Link>
           <nav className="mt-6 grid gap-4">
             <Link
-              to="#"
+              to="/"
               className="flex items-center gap-2 rounded-md px-3 py-2 text-base font-medium hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50"
             >
               Home
             </Link>
             <Link
-              to="#"
+              to="/products"
               className="flex items-center gap-2 rounded-md px-3 py-2 text-base font-medium hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50"
             >
-              Features
+              Products
             </Link>
             <Link
-              to="#"
+              to="Management"
               className="flex items-center gap-2 rounded-md px-3 py-2 text-base font-medium hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50"
             >
-              Pricing
+              Management
             </Link>
             <Link
               to="#"
@@ -64,25 +69,35 @@ const Navbar = () => {
         <NavigationMenuList>
           <NavigationMenuLink asChild>
             <Link
-              to="#"
+              to="/"
               className="inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-base font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50"
             >
               Home
             </Link>
           </NavigationMenuLink>
+
+          <NavigationMenuLink asChild>
+            <Link
+              to="/products"
+              className="inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-base font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50"
+            >
+              Products
+            </Link>
+          </NavigationMenuLink>
+
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-base">
-              Features
+              Management
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <div className="grid w-[400px] p-2">
                 <NavigationMenuLink asChild>
                   <Link
-                    to="#"
+                    to="/management"
                     className="group grid h-auto w-full items-center justify-start gap-1 rounded-md bg-white p-4 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50"
                   >
                     <div className="text-sm font-medium leading-none group-hover:underline">
-                      Analytics
+                      Management
                     </div>
                     <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
                       Upgrade your reporting with advanced analytics.
@@ -131,14 +146,7 @@ const Navbar = () => {
               </div>
             </NavigationMenuContent>
           </NavigationMenuItem>
-          <NavigationMenuLink asChild>
-            <Link
-              to="#"
-              className="inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-base font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50"
-            >
-              Pricing
-            </Link>
-          </NavigationMenuLink>
+
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-base">
               Contact
@@ -177,8 +185,13 @@ const Navbar = () => {
         </NavigationMenuList>
       </NavigationMenu>
       <div className="">
-        <Link to={'/cart'}>
-          <Button className="text-base"><ShoppingCart/></Button>
+        <Link to={"/cart"}>
+          <Button className="text-base relative flex items-center gap-2">
+            <ShoppingCart /> Cart
+            {
+              cartData.length > 0 && <Badge variant="secondary" className="absolute -top-3 -left-2 rounded-full bg-yellow-500 px-2">{cartData.length}</Badge>
+            }
+          </Button>
         </Link>
       </div>
     </header>

@@ -1,14 +1,16 @@
 import Container from "@/components/shared/Container";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { addToCart } from "@/redux/features/cart/cartSlice";
+import { addToCart, selectCart } from "@/redux/features/cart/cartSlice";
 import { useGetSingleProductQuery } from "@/redux/features/productsApi/productsApi";
 import { useAppDispatch } from "@/redux/hook";
 import { TProduct } from "@/types/TProduct";
 import { MinusIcon, PlusIcon, ShoppingCart } from "lucide-react";
 import { Rating } from "primereact/rating";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { toast } from "sonner";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
@@ -19,14 +21,25 @@ const ProductDetails = () => {
   const { data } = useGetSingleProductQuery(id);
   const product = data?.data as TProduct;
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
+  const cartData = useSelector(selectCart)
 
   const handleAddToCart = () => {
-    dispatch(addToCart({
-      product,
-      quantity,
-    }))
-  }
+    // check if already added
+    const isAdded = cartData.find(item => item.product._id === id)
+    if(isAdded){
+      toast.error('Already added')
+      return
+    }
+    
+    dispatch(
+      addToCart({
+        product,
+        quantity,
+      })
+    );
+    toast.success('Successfully added')
+  };
 
   return (
     <Container>
@@ -82,6 +95,7 @@ const ProductDetails = () => {
               </Button>
               <Input
                 value={quantity}
+                readOnly
                 className="px-1 w-10 text-center bg-transparent border-none focus-visible:ring-0 focus-visible:ring-white text-2xl"
               />
               <Button
@@ -92,7 +106,10 @@ const ProductDetails = () => {
               </Button>
             </div>
             {/* Add To cart button */}
-            <Button onClick={handleAddToCart} className="text-lg md:text-xl flex items-center gap-2 p-8 rounded-full">
+            <Button
+              onClick={handleAddToCart}
+              className="text-lg md:text-xl flex items-center gap-2 p-8 rounded-full"
+            >
               <ShoppingCart className="size-6" /> Add To Cart
             </Button>
           </div>
