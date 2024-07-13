@@ -24,7 +24,7 @@ const cartSlice = createSlice({
     },
     resetState: (state) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      state.forEach(item => state.pop())
+      state.forEach(() => state.pop())
     },
     getCart: (state) => {
       return state;
