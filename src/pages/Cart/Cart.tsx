@@ -48,9 +48,11 @@ const Cart = () => {
                     <img src={item?.product?.image} alt="product" />
                   </TableCell>
                   <TableCell>{item?.product?.title}</TableCell>
-                  <TableCell>{item?.product?.price}</TableCell>
+                  <TableCell>${item?.product?.price}</TableCell>
                   <TableCell>{item?.quantity}</TableCell>
-                  <TableCell>{item?.quantity * item?.product?.price}</TableCell>
+                  <TableCell>
+                    ${item?.quantity * item?.product?.price}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -63,21 +65,23 @@ const Cart = () => {
             </CardHeader>
             <CardContent>
               <h3 className="flex justify-between font-bold mb-8">
-                Subtotal <span>{subTotal}</span>
+                Subtotal <span>${subTotal}</span>
               </h3>
               <h3 className="flex justify-between font-bold mb-8">
-                Shipping <span>{shipping}</span>
+                Shipping <span>${shipping}</span>
               </h3>
               <h3 className="flex justify-between font-bold mb-8">
-                Total <span>{total}</span>
+                Total <span>${total}</span>
               </h3>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Link
-                to={"/checkout"}
-                className="w-full"
-              >
-                <Button className="w-full text-base py-6 rounded-full">CHECKOUT</Button>
+              <Link to={cartData.length ? "/checkout" : ""} className="w-full">
+                <Button
+                  disabled={cartData.length < 1}
+                  className="w-full text-base py-6 rounded-full"
+                >
+                  CHECKOUT
+                </Button>
               </Link>
             </CardFooter>
           </Card>

@@ -17,6 +17,7 @@ import { TProductsQuery } from "@/types/TProductsQuery";
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function valuetext(value: number) {
   return `${value}Tk`;
@@ -44,7 +45,7 @@ const Products = () => {
     page: 1,
     limit: 12,
   };
-  const { data } = useGetProductsQuery(query);
+  const { data, isLoading } = useGetProductsQuery(query);
 
   // const [createCategory, categories] = useCreateCategoryMutation()
   // const cart = useSelector(selectCart)
@@ -86,9 +87,9 @@ const Products = () => {
         </div>
       </div>
       {/* price range and sorting */}
-      <div className="flex justify-between items-center my-6 mt-14">
+      <div className="flex flex-wrap justify-between items-center my-6 mt-14">
         {/* price range */}
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap items-center gap-6">
           <h1>Price Range: </h1>
           <Box sx={{ width: 250 }}>
             <Slider
@@ -97,6 +98,7 @@ const Products = () => {
               onChange={handleChange}
               valueLabelDisplay="auto"
               getAriaValueText={valuetext}
+              color="success"
             />
           </Box>
         </div>
@@ -120,11 +122,30 @@ const Products = () => {
           </SelectContent>
         </Select>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {data?.data.map((item: TProduct) => (
-          <ProductCard key={item._id} product={item} />
-        ))}
-      </div>
+      {/* data mapping */}
+      {isLoading ? (
+        <div className="flex flex-col md:flex-row gap-6 justify-between items-center">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <div key={index} className="space-y-2">
+              <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-[250px]" />
+                <Skeleton className="h-4 w-[200px]" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : data?.data.length ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {data?.data.map((item: TProduct) => (
+            <ProductCard key={item._id} product={item} />
+          ))}
+        </div>
+      ) : (
+        <h1 className="text-center text-lg text-gray-500 my-10">
+          No Data Found
+        </h1>
+      )}
     </Container>
   );
 };

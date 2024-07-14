@@ -6,28 +6,32 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { addToCart, increaseQuantity, selectCart } from "@/redux/features/cart/cartSlice";
+import {
+  addToCart,
+  increaseQuantity,
+  selectCart,
+} from "@/redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { TProduct } from "@/types/TProduct";
-import { ShoppingCart } from "lucide-react";
+import { Check, ShoppingCart } from "lucide-react";
 import { Rating } from "primereact/rating";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 const ProductCard = ({ product }: { product: TProduct }) => {
-  const { _id, title, image, price, rating } = product;
+  const { _id, title, image, price, rating, quantity } = product;
   const dispatch = useAppDispatch();
-  const cartData = useAppSelector(selectCart)
+  const cartData = useAppSelector(selectCart);
+  const isAdded = cartData.find((item) => item.product._id === _id);
 
   const handleAddToCart = () => {
     // check if the product already added
-    const isAdded = cartData.find(item => item.product._id === _id)
-    if(isAdded){
-      dispatch(increaseQuantity({...isAdded, increaseBy: 1}))
-      toast.success('Item Quantity Updated')
-      return
+    if (isAdded) {
+      dispatch(increaseQuantity({ ...isAdded, increaseBy: 1 }));
+      toast.success("Item Quantity Updated");
+      return;
     }
-    
+
     dispatch(
       addToCart({
         product,
@@ -35,7 +39,7 @@ const ProductCard = ({ product }: { product: TProduct }) => {
         price,
       })
     );
-    toast.success('Added to cart successfully')
+    toast.success("Added to cart successfully");
   };
 
   return (
@@ -60,11 +64,18 @@ const ProductCard = ({ product }: { product: TProduct }) => {
         </CardContent>
       </Link>
       <CardFooter>
-        <Button
-          onClick={handleAddToCart}
-          className="w-full text-base flex items-center gap-2"
-        >
-          <ShoppingCart className="size-6" /> Add To Cart
+        <Button onClick={handleAddToCart} className={`w-full text-base`} disabled={quantity < 1}>
+          {quantity < 1 ? (
+            "Out of Stock"
+          ) : isAdded ? (
+            <span className="flex items-center gap-2 text-base">
+              <Check className="size-6" /> Added
+            </span>
+          ) : (
+            <span className="flex items-center gap-2 text-base">
+              <ShoppingCart className="size-6 " /> Add To Cart
+            </span>
+          )}
         </Button>
       </CardFooter>
     </Card>
