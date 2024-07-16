@@ -30,6 +30,8 @@
     "@smastrom/react-rating": "^1.5.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "embla-carousel-autoplay": "^8.1.6",
+    "embla-carousel-react": "^8.1.6",
     "lucide-react": "^0.407.0",
     "next-themes": "^0.3.0",
     "primereact": "^10.7.0",
