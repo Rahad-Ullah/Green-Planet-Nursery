@@ -28,7 +28,7 @@ const Navbar = () => {
         </SheetTrigger>
         <SheetContent side="left">
           <Link to="#" className="flex items-center gap-2">
-            <Earth className="size-6 text-green-600" />
+            <Earth className="size-6 text-green-600 animate-spin" />
             <span className="text-lg font-semibold">Green Planet</span>
           </Link>
           <nav className="mt-6 grid gap-4">
@@ -84,7 +84,7 @@ const Navbar = () => {
               Products
             </Link>
           </NavigationMenuLink>
-
+          {/* Management */}
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-base">
               Management
@@ -97,56 +97,17 @@ const Navbar = () => {
                     className="group grid h-auto w-full items-center justify-start gap-1 rounded-md bg-white p-4 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50"
                   >
                     <div className="text-sm font-medium leading-none group-hover:underline">
-                      Management
+                      Product and Category Management
                     </div>
                     <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
-                      Upgrade your reporting with advanced analytics.
-                    </div>
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link
-                    to="#"
-                    className="group grid h-auto w-full items-center justify-start gap-1 rounded-md bg-white p-4 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50"
-                  >
-                    <div className="text-sm font-medium leading-none group-hover:underline">
-                      Developer Tools
-                    </div>
-                    <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
-                      Extend your application with our developer tools.
-                    </div>
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link
-                    to="#"
-                    className="group grid h-auto w-full items-center justify-start gap-1 rounded-md bg-white p-4 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50"
-                  >
-                    <div className="text-sm font-medium leading-none group-hover:underline">
-                      Security & Compliance
-                    </div>
-                    <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
-                      Keep your data secure with our security features.
-                    </div>
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link
-                    to="#"
-                    className="group grid h-auto w-full items-center justify-start gap-1 rounded-md bg-white p-4 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50"
-                  >
-                    <div className="text-sm font-medium leading-none group-hover:underline">
-                      Scalability
-                    </div>
-                    <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
-                      Scale your application with our infrastructure.
+                      Add, delete, update product and category.
                     </div>
                   </Link>
                 </NavigationMenuLink>
               </div>
             </NavigationMenuContent>
           </NavigationMenuItem>
-
+          {/* contact */}
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-base">
               Contact
@@ -187,7 +148,7 @@ const Navbar = () => {
       <div className="">
         <Link to={"/cart"}>
           <Button className="text-base relative flex items-center gap-2">
-            <ShoppingCart /> Cart
+            <ShoppingCart className="animate-bounce"/> Cart
             {
               cartData.length > 0 && <Badge variant="secondary" className="absolute -top-3 -left-2 rounded-full bg-yellow-500 px-2">{cartData.length}</Badge>
             }

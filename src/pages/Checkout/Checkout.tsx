@@ -1,4 +1,15 @@
 import Container from "@/components/shared/Container";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -15,6 +26,7 @@ import {
 } from "@/components/ui/table";
 import { useCreateOrderMutation } from "@/redux/features/cart/cartApi";
 import { resetState, selectCart } from "@/redux/features/cart/cartSlice";
+import { productsApi } from "@/redux/features/productsApi/productsApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { calculation } from "@/utils/calculation";
 import { XIcon } from "lucide-react";
@@ -29,7 +41,7 @@ const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState("COD");
 
   const cartData = useAppSelector(selectCart);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const [createOrder] = useCreateOrderMutation();
   const { subTotal, shipping, total } = calculation(cartData);
 
@@ -63,7 +75,8 @@ const Checkout = () => {
       const res = await createOrder(orderData).unwrap();
       if (res.success) {
         toast.success("Order placed successfully");
-        dispatch(resetState())
+        dispatch(resetState());
+        dispatch(productsApi.util.resetApiState());
       }
     } catch (error) {
       console.log(error);
@@ -72,7 +85,7 @@ const Checkout = () => {
 
   return (
     <Container>
-      <div className="flex w-full justify-between gap-10 my-12">
+      <div className="flex flex-wrap w-full justify-between gap-10 my-12">
         {/* billing details */}
         <div className="border p-8 flex-1">
           <CardTitle className="mb-8 font-bold">Billing Details</CardTitle>
@@ -126,7 +139,7 @@ const Checkout = () => {
             </div>
           </form>
         </div>
-        <div className="w-1/2 p-8 border">
+        <div className="w-full md:w-1/2 p-8 border">
           <CardTitle className="mb-8 font-bold">Your Order</CardTitle>
           <Table className="text-base">
             {/* {cartData.length < 1 && (
@@ -189,12 +202,31 @@ const Checkout = () => {
             </div>
           </RadioGroup>
           <div className="mt-8">
-            <Button
-              onClick={handlePlaceOrder}
-              className="w-full text-base py-6 rounded-full"
-            >
-              PLACE ORDER
-            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger className="w-full">
+                <Button
+                  disabled={cartData.length < 1}
+                  className="w-full text-base py-6 rounded-full"
+                >
+                  CHECKOUT
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently submit
+                    an order to our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={handlePlaceOrder}>
+                    Continue
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
       </div>

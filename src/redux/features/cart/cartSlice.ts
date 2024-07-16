@@ -22,9 +22,9 @@ const cartSlice = createSlice({
         existingItem.quantity += increaseBy;
       }
     },
-    resetState: (state) => {
+    resetState: () => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      state.forEach(() => state.pop())
+      return initialState;
     },
     getCart: (state) => {
       return state;

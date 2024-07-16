@@ -27,6 +27,7 @@ const Cart = () => {
   return (
     <Container>
       <div className="flex flex-col md:flex-row gap-8 my-16">
+        {/* product table */}
         <div className="flex-1">
           <Table className="text-base">
             {cartData.length < 1 && (
@@ -58,7 +59,7 @@ const Cart = () => {
             </TableBody>
           </Table>
         </div>
-        <div className="w-4/12">
+        <div className="w-full md:w-4/12">
           <Card className="p-4 py-6 rounded-xl">
             <CardHeader>
               <CardTitle className="font-bold text-3xl">Cart Total</CardTitle>

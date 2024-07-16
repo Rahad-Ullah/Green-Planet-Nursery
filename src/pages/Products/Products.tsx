@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useGetProductsQuery } from "@/redux/features/productsApi/productsApi";
 import ProductCard from "./ProductsUtils/ProductCard";
 import { TProduct } from "@/types/TProduct";
@@ -18,6 +19,7 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useGetCategoriesQuery } from "@/redux/features/category/categoryApi";
 
 function valuetext(value: number) {
   return `${value}Tk`;
@@ -45,7 +47,8 @@ const Products = () => {
     page: 1,
     limit: 12,
   };
-  const { data, isLoading } = useGetProductsQuery(query);
+  const { data, isFetching } = useGetProductsQuery(query);
+  const { data: categories } = useGetCategoriesQuery(undefined);
 
   // const [createCategory, categories] = useCreateCategoryMutation()
   // const cart = useSelector(selectCart)
@@ -75,8 +78,11 @@ const Products = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="Indoor Plants">Indoor Plants</SelectItem>
-                  <SelectItem value="Succulents">Succulents</SelectItem>
+                  {categories?.data.map((item: any) => (
+                    <SelectItem key={item._id} value={item?.category}>
+                      {item?.category}
+                    </SelectItem>
+                  ))}
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -123,7 +129,7 @@ const Products = () => {
         </Select>
       </div>
       {/* data mapping */}
-      {isLoading ? (
+      {isFetching ? (
         <div className="flex flex-col md:flex-row gap-6 justify-between items-center">
           {Array.from({ length: 4 }).map((_, index) => (
             <div key={index} className="space-y-2">
