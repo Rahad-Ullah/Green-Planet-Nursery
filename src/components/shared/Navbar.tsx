@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
-import { Earth, MenuIcon, ShoppingCart } from "lucide-react";
+import { MenuIcon, ShoppingCart } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -13,12 +13,13 @@ import {
 import { Badge } from "../ui/badge";
 import { useAppSelector } from "@/redux/hook";
 import { selectCart } from "@/redux/features/cart/cartSlice";
+import logo from '../../../public/green-planet.png'
 
 const Navbar = () => {
   const cartData = useAppSelector(selectCart)
   
   return (
-    <header className="flex h-20 w-full shrink-0 justify-between items-center px-4 md:px-6">
+    <header className="flex h-20 w-full shrink-0 justify-between items-center px-4 md:px-6 shadow-sm sticky">
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="lg:hidden">
@@ -27,8 +28,8 @@ const Navbar = () => {
           </Button>
         </SheetTrigger>
         <SheetContent side="left">
-          <Link to="#" className="flex items-center gap-2">
-            <Earth className="size-6 text-green-600 animate-spin" />
+          <Link to="/" className="flex items-center gap-2 group">
+            <img src={logo} className="w-10" />
             <span className="text-lg font-semibold">Green Planet</span>
           </Link>
           <nav className="mt-6 grid gap-4">
@@ -60,8 +61,8 @@ const Navbar = () => {
         </SheetContent>
       </Sheet>
       <div className="hidden lg:flex">
-        <Link to="#" className="flex items-center gap-2">
-          <Earth className="size-8 text-green-600" />
+        <Link to="#" className="flex items-center gap-2 group">
+          <img src={logo} className="w-12" />
           <span className="text-xl font-semibold">Green Planet Nursery</span>
         </Link>
       </div>
