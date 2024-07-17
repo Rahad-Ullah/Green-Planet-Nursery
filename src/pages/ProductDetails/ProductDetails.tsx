@@ -35,10 +35,17 @@ const ProductDetails = () => {
   const isAdded = cartData.find((item) => item.product._id === id);
 
   const handleAddToCart = () => {
-    // check if already added
-    if (isAdded) {
+    // check if already added and increase
+    if (isAdded && isAdded?.quantity < product?.quantity) {
+      // const availableQuantity = product?.quantity - isAdded?.quantity;
       dispatch(increaseQuantity({ ...isAdded, increaseBy: quantity }));
       toast.success("Item Quantity Updated");
+      return;
+    }
+
+    // check if quantity not overcome available quantity
+    if (isAdded && isAdded?.quantity >= product?.quantity) {
+      toast.error("Out of Stock");
       return;
     }
 
@@ -119,7 +126,9 @@ const ProductDetails = () => {
                   className="px-1 w-10 text-center bg-transparent border-none focus-visible:ring-0 focus-visible:ring-white text-xl"
                 />
                 <Button
-                  onClick={() => setQuantity(quantity + 1)}
+                  onClick={() =>
+                    quantity < product?.quantity && setQuantity(quantity + 1)
+                  }
                   className="rounded-full p-1.5 h-8"
                 >
                   <PlusIcon size={20} />
@@ -127,7 +136,7 @@ const ProductDetails = () => {
               </div>
               {/* Add To cart button */}
               <Button
-                disabled={quantity < 1}
+                disabled={product?.quantity < 1}
                 onClick={handleAddToCart}
                 className="text-lg flex items-center gap-2 py-6 md:p-7 rounded-full"
               >

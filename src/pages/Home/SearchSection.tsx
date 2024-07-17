@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useGetProductsQuery } from "@/redux/features/productsApi/productsApi";
-import ProductCard from "./ProductsUtils/ProductCard";
-import { TProduct } from "@/types/TProduct";
 import Container from "@/components/shared/Container";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -11,21 +10,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
-import { TProductsQuery } from "@/types/TProductsQuery";
-import { useState } from "react";
-import Box from "@mui/material/Box";
-import Slider from "@mui/material/Slider";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetCategoriesQuery } from "@/redux/features/category/categoryApi";
-
+import { useGetProductsQuery } from "@/redux/features/productsApi/productsApi";
+import { TProductsQuery } from "@/types/TProductsQuery";
+import { Box, Slider } from "@mui/material";
+import { Search } from "lucide-react";
+import { useState } from "react";
+import ProductCard from "../Products/ProductsUtils/ProductCard";
+import { TProduct } from "@/types/TProduct";
 function valuetext(value: number) {
   return `${value}Tk`;
 }
 
-const Products = () => {
+const SearchSection = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const [sort, setSort] = useState("title-asc");
@@ -52,43 +50,46 @@ const Products = () => {
 
   return (
     <Container>
-      <h1 className="text-3xl md:text-4xl font-bold text-center py-6 mt-10 pb-10">
-        Our Plants
-      </h1>
-      {/* Search space */}
-      <div className="flex justify-center items-center">
-        <div
-          tabIndex={0}
-          className="flex w-full max-w-xl items-center space-x-2 p-1 border rounded-lg"
-        >
-          <Input
-            onChange={(e) => setSearch(e.target.value)}
-            type="search"
-            placeholder="Search here"
-            className="border-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-white text-base"
-          />
-          {/* select category */}
-          <div className="border-l">
-            <Select onValueChange={(value) => setCategory(value)}>
-              <SelectTrigger className="w-[120px] border-none border border-l-2 focus:outline-none focus:ring-0 focus:ring-white hover:bg-slate-100">
-                <SelectValue placeholder="Category" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  {categories?.data.map((item: any) => (
-                    <SelectItem key={item._id} value={item?.category}>
-                      {item?.category}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+      <div className="p-2 py-8 md:py-16 my-10 bg-green-700 bg-opacity-90 rounded-2xl">
+        <h1 className="text-2xl md:text-4xl text-center font-bold text-white mb-6 md:mb-8">
+          Search Your Favourite Plants
+        </h1>
+        {/* Search space */}
+        <div className="flex justify-center items-center">
+          <div
+            tabIndex={0}
+            className="flex flex-col md:flex-row gap-2 w-full max-w-xl items-center space-x-2 p-1 rounded-lg"
+          >
+            <Input
+              onChange={(e) => setSearch(e.target.value)}
+              type="search"
+              placeholder="Search here"
+              className="border-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-white text-base"
+            />
+            {/* select category */}
+            <div className="flex items-center gap-2">
+              <Select onValueChange={(value) => setCategory(value)}>
+                <SelectTrigger className="w-[120px] border-none border border-l-2 focus:outline-none focus:ring-0 focus:ring-white hover:bg-slate-100">
+                  <SelectValue placeholder="Category" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {categories?.data.map((item: any) => (
+                      <SelectItem key={item._id} value={item?.category}>
+                        {item?.category}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <Button type="submit" variant={"secondary"}>
+                <Search />
+              </Button>
+            </div>
           </div>
-          <Button type="submit">
-            <Search />
-          </Button>
         </div>
       </div>
+
       {/* price range and sorting */}
       <div className="flex flex-wrap justify-between items-center my-6 mt-14">
         {/* price range */}
@@ -105,6 +106,8 @@ const Products = () => {
             />
           </Box>
         </div>
+
+        {/* sorting */}
         <Select onValueChange={(value) => setSort(value)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Default Sorting" />
@@ -154,4 +157,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default SearchSection;

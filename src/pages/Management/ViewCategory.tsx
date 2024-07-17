@@ -68,7 +68,7 @@ const ViewCategory = () => {
 
           <DialogFooter className="md:justify-end">
             <DialogClose asChild>
-              <Button type="button" variant="outline">
+              <Button type="button" variant="default">
                 Close
               </Button>
             </DialogClose>

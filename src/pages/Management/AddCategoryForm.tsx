@@ -37,6 +37,7 @@ const formSchema = z.object({
       message: "First letter must be capitalized",
     }
   ),
+  image: z.string().min(2, {message: 'Image url must be at least 2 characters'})
 });
 
 const AddCategoryForm = () => {
@@ -47,6 +48,7 @@ const AddCategoryForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       category: "",
+      image: ""
     },
   });
 
@@ -105,7 +107,20 @@ const AddCategoryForm = () => {
                   </FormItem>
                 )}
               />
-              <DialogFooter className="md:justify-end">
+              <FormField
+                control={form.control}
+                name="image"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category Image</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Category image URL" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <DialogFooter className="md:justify-end gap-y-2">
                 <DialogClose asChild>
                   <Button type="button" variant="outline">
                     Close

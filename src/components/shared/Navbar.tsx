@@ -19,7 +19,7 @@ const Navbar = () => {
   const cartData = useAppSelector(selectCart)
   
   return (
-    <header className="flex h-20 w-full shrink-0 justify-between items-center px-4 md:px-6 shadow-sm sticky">
+    <header className="flex h-20 w-full shrink-0 justify-between items-center px-4 md:px-6 shadow-sm sticky z-50">
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="lg:hidden">
@@ -46,7 +46,7 @@ const Navbar = () => {
               Products
             </Link>
             <Link
-              to="Management"
+              to="/management"
               className="flex items-center gap-2 rounded-md px-3 py-2 text-base font-medium hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50"
             >
               Management
@@ -87,11 +87,11 @@ const Navbar = () => {
           </NavigationMenuLink>
           {/* Management */}
           <NavigationMenuItem>
-            <NavigationMenuTrigger className="text-base">
+            <NavigationMenuTrigger className="text-base z-50">
               Management
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="grid w-[400px] p-2">
+              <div className="grid w-[400px] p-2 z-50">
                 <NavigationMenuLink asChild>
                   <Link
                     to="/management"

@@ -29,41 +29,27 @@ import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
-  title: z
-    .string()
-    .min(2, {
-      message: "Title must be at least 2 characters.",
-    }),
-  category: z
-    .string()
-    .min(2, {
-      message: "Category must be at least 2 characters.",
-    }),
-  price: z
-    .string()
-    .min(1, {
-      message: "Price must be a positive number.",
-    }),
-  quantity: z
-    .string()
-    .min(1, {
-      message: "Quantity must be a positive number.",
-    }),
-  rating: z
-    .string()
-    .min(1, {
-      message: "Rating must be a positive number.",
-    }),
-  description: z
-    .string()
-    .min(5, {
-      message: "Description must be at least 5 words",
-    }),
-  image: z
-    .string()
-    .min(1, {
-      message: "Image must be a valid url",
-    }),
+  title: z.string().min(2, {
+    message: "Title must be at least 2 characters.",
+  }),
+  category: z.string().min(2, {
+    message: "Category must be at least 2 characters.",
+  }),
+  price: z.string().min(1, {
+    message: "Price must be a positive number.",
+  }),
+  quantity: z.string().min(1, {
+    message: "Quantity must be a positive number.",
+  }),
+  rating: z.string().min(1, {
+    message: "Rating must be a positive number.",
+  }),
+  description: z.string().min(5, {
+    message: "Description must be at least 5 words",
+  }),
+  image: z.string().min(1, {
+    message: "Image must be a valid url",
+  }),
 });
 
 const AddForm = () => {
@@ -97,7 +83,7 @@ const AddForm = () => {
 
       if (data?.success) {
         toast.success("Added successfully", { id: "add" });
-        form.reset()
+        form.reset();
       } else {
         toast.error("Something went wrong", { id: "add" });
       }
@@ -161,7 +147,11 @@ const AddForm = () => {
                   <FormItem>
                     <FormLabel>Price</FormLabel>
                     <FormControl>
-                      <Input placeholder="Product price" {...field} type="number"/>
+                      <Input
+                        placeholder="Product price"
+                        {...field}
+                        type="number"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -174,7 +164,11 @@ const AddForm = () => {
                   <FormItem>
                     <FormLabel>Quantity</FormLabel>
                     <FormControl>
-                      <Input placeholder="Product quantity" {...field} type="number"/>
+                      <Input
+                        placeholder="Product quantity"
+                        {...field}
+                        type="number"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -187,7 +181,11 @@ const AddForm = () => {
                   <FormItem>
                     <FormLabel>Rating</FormLabel>
                     <FormControl>
-                      <Input placeholder="Product rating" {...field} type="number"/>
+                      <Input
+                        placeholder="Product rating"
+                        {...field}
+                        type="number"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -219,13 +217,13 @@ const AddForm = () => {
                   </FormItem>
                 )}
               />
-              <DialogFooter className="md:justify-end">
+              <DialogFooter className="md:justify-end gap-y-2">
                 <DialogClose asChild>
                   <Button type="button" variant="outline">
                     Close
                   </Button>
                 </DialogClose>
-                  <Button>Add Product</Button>
+                <Button>Add Product</Button>
               </DialogFooter>
             </form>
           </Form>

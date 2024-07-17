@@ -41,7 +41,7 @@ const Management = () => {
 
   return (
     <Container>
-      <div className="my-4 flex flex-wrap justify-between mt-12">
+      <div className="my-4 flex flex-wrap justify-between gap-2 mt-12">
         <AddForm />
         <div className="flex flex-wrap items-center gap-2">
           <AddCategoryForm />
