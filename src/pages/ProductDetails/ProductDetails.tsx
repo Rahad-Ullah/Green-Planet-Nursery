@@ -67,10 +67,14 @@ const ProductDetails = () => {
         </div>
       ) : (
         <div className="flex flex-col-reverse md:flex-row gap-10 my-12">
-          <div className="max-w-md">
-            <img src={product?.image} alt="product-image" className="rounded" />
+          <div className="md:max-w-xs lg:max-w-sm xl:max-w-md">
+            <img
+              src={product?.image}
+              alt="product-image"
+              className="rounded w-full"
+            />
           </div>
-          <div>
+          <div className="flex-1">
             <h1 className="text-2xl md:text-3xl font-bold mb-2">
               {product?.title}
             </h1>
@@ -86,13 +90,9 @@ const ProductDetails = () => {
             <h2 className="text-2xl md:text-3xl font-bold py-6">
               $ {product?.price}
             </h2>
-            <p className="md:text-lg">
-              <span className="font-bold">Description:</span>{" "}
-              {product?.description}
-            </p>
             <div>
               {product?.quantity > 1 ? (
-                <p className="my-8 md:text-lg font-bold">
+                <p className="my-8 mt-4 md:text-lg font-bold">
                   <span
                     className={`p-4 py-3 border-2 ${
                       product?.quantity > 5
@@ -151,6 +151,10 @@ const ProductDetails = () => {
                 )}
               </Button>
             </div>
+            <p className="md:text-lg mt-6">
+              <span className="font-bold">Description:</span>{" "}
+              {product?.description}
+            </p>
           </div>
         </div>
       )}

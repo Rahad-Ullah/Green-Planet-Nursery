@@ -43,7 +43,7 @@ const formSchema = z.object({
 const AddCategoryForm = () => {
   const [addCategory] = useCreateCategoryMutation();
 
-  // 1. Define your form.
+  // 1. form definition.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

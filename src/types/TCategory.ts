@@ -3,3 +3,8 @@ export type TCategory = {
   category: string;
   image: string;
 };
+
+export type TNewsletter = {
+  _id?: string;
+  email: string;
+};

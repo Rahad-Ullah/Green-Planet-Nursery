@@ -1,15 +1,14 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../shared/Navbar";
+import Navbar from "../shared/Navbar/Navbar";
 import { useEffect } from "react";
-
 const MainLayout = () => {
-    // Alert before reloading page
+  // Alert before reloading page
   useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
       const message =
         "Are you sure you want to reload this page? Cart data might be lost.";
       event.preventDefault();
-      return message; 
+      return message;
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);

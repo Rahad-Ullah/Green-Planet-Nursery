@@ -8,7 +8,7 @@ import ProductDetails from "@/pages/ProductDetails/ProductDetails";
 import Products from "@/pages/Products/Products";
 import { createBrowserRouter } from "react-router-dom";
 
-export const router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
@@ -18,29 +18,31 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: 'products',
-        element: <Products/>,
+        path: "/products",
+        element: <Products />,
       },
       {
-        path: 'products/:id',
-        element: <ProductDetails/>,
+        path: "/products/:id",
+        element: <ProductDetails />,
       },
       {
-        path: 'categories/:category',
-        element: <Category/>,
+        path: "/categories/:category",
+        element: <Category />,
       },
       {
-        path: 'management',
-        element: <Management/>,
+        path: "/management",
+        element: <Management />,
       },
       {
-        path: 'cart',
-        element: <Cart/>,
+        path: "/cart",
+        element: <Cart />,
       },
       {
-        path: 'checkout',
-        element: <Checkout/>,
+        path: "/checkout",
+        element: <Checkout />,
       },
     ],
   },
 ]);
+
+export default router;

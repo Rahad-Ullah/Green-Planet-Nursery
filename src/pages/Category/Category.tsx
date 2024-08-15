@@ -19,34 +19,38 @@ const Category = () => {
     category: category || "",
     minPrice: 0,
     maxPrice: 100000,
-    sortBy: "",
+    sortBy: "title",
     sortOrder: "asc",
     page: 1,
-    limit: 12,
+    limit: 16,
   };
 
   const { data: products, isFetching } = useGetProductsQuery(query);
 
   return (
     <Container>
-      <h1 className="text-3xl md:text-4xl font-bold text-center my-10 lg:my-16">{category}</h1>
+      <h1 className="text-3xl md:text-4xl font-bold text-center my-10 lg:my-16">
+        {category}
+      </h1>
 
       {/* data mapping */}
       {isFetching ? (
-        <div className="flex flex-col md:flex-row gap-6 justify-between items-center">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <div key={index} className="space-y-2">
-              <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-              <div className="space-y-2">
-                <Skeleton className="h-4 w-[250px]" />
-                <Skeleton className="h-4 w-[200px]" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-6 justify-between items-center mb-16">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <div key={index} className="space-y-4">
+              <Skeleton className="h-52 w-full rounded-xl" />
+              <div className="space-y-4">
+                <Skeleton className="h-4 w-10/12" />
+                <Skeleton className="h-6 w-4/12" />
+                <Skeleton className="h-4 w-5/12" />
+                <Skeleton className="h-10 w-12/12" />
               </div>
             </div>
           ))}
         </div>
-      ) : products?.data.length ? (
+      ) : products?.data?.products.length ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {products?.data.map((item: TProduct) => (
+          {products?.data?.products.map((item: TProduct) => (
             <ProductCard key={item._id} product={item} />
           ))}
         </div>
