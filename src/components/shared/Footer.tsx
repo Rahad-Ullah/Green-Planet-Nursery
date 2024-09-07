@@ -62,7 +62,7 @@ const Footer = () => {
   return (
     <footer className="pt-20 bg-green-100">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="my-4">
             <img className="w-14 mb-4" src={logo} alt="logo" />
             <h1 className="text-xl font-bold">Green Planet Nursery</h1>
