@@ -25,7 +25,7 @@ const ImageGallery = () => {
 
   return (
     <Container>
-      <div className="pb-16">
+      <div className="pb-16" id="gallery">
         <h1 className="text-3xl md:text-4xl font-bold text-center py-6 mt-10 pb-10">
           Gallery
         </h1>
