@@ -71,7 +71,7 @@ const Footer = () => {
             {/* app store links */}
             <div className="flex items-center gap-3 my-4">
               <Link
-                to={"https://facebook.com"}
+                to={"https://play.google.com/store/apps"}
                 className="border border-primary rounded-md p-2 py-0.5 flex items-center justify-center gap-1 text-primary hover:bg-green-200"
               >
                 <svg
@@ -93,7 +93,7 @@ const Footer = () => {
                 </div>
               </Link>
               <Link
-                to={"https://facebook.com"}
+                to={"https://www.apple.com/lae/app-store"}
                 className="border border-primary rounded-md p-2 py-0.5 flex items-center justify-center gap-1 text-primary hover:bg-green-200"
               >
                 <svg
@@ -121,24 +121,32 @@ const Footer = () => {
               Quick Links
             </li>
             <li>
-              <Button variant={"ghost"} className="hover:bg-green-200">
-                Home
-              </Button>
+              <Link to={"/"}>
+                <Button variant={"ghost"} className="hover:bg-green-200">
+                  Home
+                </Button>
+              </Link>
             </li>
             <li>
-              <Button variant={"ghost"} className="hover:bg-green-200">
-                Products
-              </Button>
+              <Link to={"/products"}>
+                <Button variant={"ghost"} className="hover:bg-green-200">
+                  Products
+                </Button>
+              </Link>
             </li>
             <li>
-              <Button variant={"ghost"} className="hover:bg-green-200">
-                Management
-              </Button>
+              <Link to={"/management"}>
+                <Button variant={"ghost"} className="hover:bg-green-200">
+                  Management
+                </Button>
+              </Link>
             </li>
             <li>
-              <Button variant={"ghost"} className="hover:bg-green-200">
-                About Us
-              </Button>
+              <Link to={""}>
+                <Button variant={"ghost"} className="hover:bg-green-200">
+                  About Us
+                </Button>
+              </Link>
             </li>
           </ul>
           <ul className="space-y-4">
