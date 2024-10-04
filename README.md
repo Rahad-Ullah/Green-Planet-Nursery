@@ -16,9 +16,6 @@ https://green-planet-nursery-client.vercel.app
 
 ## Features
 
-- **User Authentication and Authorization:**
-  Users can easily sign up and log in using their email and password. Admins have special permissions to manage products and orders.
-
 - **Shopping Cart System:**
   Users can add plants to their cart and check out securely. The system calculates the total cost based on selected items.
 
@@ -36,9 +33,6 @@ https://green-planet-nursery-client.vercel.app
 
 - **Error Handling:**
   The system includes comprehensive error handling to provide clear messages for issues like invalid entries or unavailable products.
-
-- **Authentication Middleware:**
-  Middleware is in place to protect routes, ensuring that only logged-in users and authorized admins can access specific areas.
 
 - **Security:**
   A robust security system is implemented to protect user data and ensure that only authorized users can access sensitive information.
