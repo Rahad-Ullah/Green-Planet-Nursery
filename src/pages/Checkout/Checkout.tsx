@@ -104,7 +104,7 @@ const Checkout = () => {
         toast.success("Order placed successfully", { id: "order" });
         dispatch(resetState());
         dispatch(productsApi.util.resetApiState());
-        form.reset()
+        form.reset();
       }
     } catch (error) {
       toast.error("Something went wrong", { id: "order" });
@@ -119,10 +119,7 @@ const Checkout = () => {
         <div className="border p-8 flex-1">
           <CardTitle className="mb-8 font-bold">Billing Details</CardTitle>
           <Form {...form}>
-            <form
-              // onSubmit={form.handleSubmit(handlePlaceOrder)}
-              className="space-y-8 px-1"
-            >
+            <form className="space-y-8 px-1">
               <FormField
                 control={form.control}
                 name="name"

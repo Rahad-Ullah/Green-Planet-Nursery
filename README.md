@@ -1,8 +1,105 @@
 # Green Planet Nursery
 
-## Used Technologies:
+## Introduction
+
+**Green Planet Nursery** is an online nursery shop.
+
+## Project Description
+
+**Game Spaces** allows users to buy plants with ease and provides admins the ability to manage these plant products and orders. Users can buy plants online with ease! Enjoy simple online shopping and fast delivery right to your door.
+
+### [Live Site](https://green-planet-nursery-client.vercel.app)
+
+```base
+https://green-planet-nursery-client.vercel.app
+```
+
+## Features
+
+- **User Authentication and Authorization:**
+  Users can easily sign up and log in using their email and password. Admins have special permissions to manage products and orders.
+
+- **Shopping Cart System:**
+  Users can add plants to their cart and check out securely. The system calculates the total cost based on selected items.
+
+- **Product Availability Checking:**
+  Users can check the availability of plants and items before placing an order.
+
+- **Order Cancellation:**
+  Users have the option to cancel their orders if needed.
+
+- **View Orders:**
+  Admins can view all customer orders, while users can see their own order history for easy tracking.
+
+- **Product Management:**
+  Admins can create, update, and delete products. Each item includes details like name, description, price, and care instructions.
+
+- **Error Handling:**
+  The system includes comprehensive error handling to provide clear messages for issues like invalid entries or unavailable products.
+
+- **Authentication Middleware:**
+  Middleware is in place to protect routes, ensuring that only logged-in users and authorized admins can access specific areas.
+
+- **Security:**
+  A robust security system is implemented to protect user data and ensure that only authorized users can access sensitive information.
+
+- **Maintainable Codebase:**
+  The codebase is clean, well-organized, and well-documented, following industry standards to ensure easy maintenance and future updates.
+
+## Technology Stack
+
 - React
 - Redux
-- Tailwind CSS
-- Ant Design
-- React Router
+- TypeScript
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- Shadcn UI
+
+## Installation Guideline
+
+Follow the instructions given below to install and run the project locally.
+
+### Prerequisites
+
+- Node.js
+- Code Editor (E.g. Visual Studio Code)
+
+### Installation Steps
+
+1. **Clone the Repository:**
+
+   ```base
+   git clone https://github.com/Rahad-Ullah/Green-Planet-Nursery-Client.git
+   ```
+
+2. **Open in a Code Editor:**
+   Open the directory in a code editor like VS Code.
+3. **Install Dependencies:**
+
+   ```markdown
+   npm install
+   ```
+
+4. **Run the project:**
+
+   ```markdown
+   npm run dev
+   ```
+
+### Configuration
+
+1. Create a `.env.local` file in the root directory of the project.
+2. Add these configuration variables in the `.env.local` file.
+   Example:
+   ```bash
+    PORT=5173
+    VITE_API_KEY=your_api_key
+   ```
+
+## Usage
+
+Browse the website in your browser and get the full experience.
+
+## Happy Coding 😎
