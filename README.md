@@ -6,7 +6,7 @@
 
 ## Project Description
 
-**Game Spaces** allows users to buy plants with ease and provides admins the ability to manage these plant products and orders. Users can buy plants online with ease! Enjoy simple online shopping and fast delivery right to your door.
+**Green Planet Nursery** allows users to buy plants with ease and provides admins the ability to manage these plant products and orders. Users can buy plants online with ease! Enjoy simple online shopping and fast delivery right to your door.
 
 ### [Live Site](https://green-planet-nursery-client.vercel.app)
 
